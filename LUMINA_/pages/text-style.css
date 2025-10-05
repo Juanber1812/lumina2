@@ -1,0 +1,55 @@
+/* === TEXT PAGE STYLING === */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+  overflow-y: auto;
+  background: url("../images/StarryNight.jpg") center center / cover no-repeat fixed;
+}
+
+/* --- CONTENT CONTAINER --- */
+.content {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 40px;
+  background: rgba(11, 30, 57, 0.7); /* translucent navy overlay */
+  border-radius: 16px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  line-height: 2;
+  text-align: justify;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.4rem;
+  margin-bottom: 50px;
+  color: #ffffff;
+}
+
+p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+}
+
+/* --- LOGO --- */
+.logo-container {
+  text-align: center;
+  margin-top: 60px;
+  padding-bottom: 60px;
+}
+
+.logo-container img {
+  height: 100px;
+  width: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.logo-container img:hover {
+  transform: scale(1.05);
+}

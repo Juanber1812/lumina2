@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #0b1e39;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+
+    h1 {
+      margin-top: 50px;
+      font-size: 2.5rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px 80px;
+    }
+
+    .team-grid a {
+      display: block;
+      text-decoration: none;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-grid img {
+      width: 100%;
+      max-width: 350px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+    }
+
+    .team-grid a:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Meet the Team</h1>
+
+  <div class="team-grid">
+    <a href="https://www.linkedin.com/in/juan-bernardo-pastuszak-leon-8577832b1/" target="_blank"><img src="../images/Juan.png" alt="Juan"></a>
+    <a href="https://www.linkedin.com/in/hassan-taibaly" target="_blank"><img src="../images/Hassan.png" alt="Hassan"></a>
+    <a href="https://www.linkedin.com/in/thomas-farrugia-38949b284/" target="_blank"><img src="../images/Thomas.png" alt="Thomas"></a>
+    <a href="https://www.linkedin.com/in/jad-el-badaoui/" target="_blank"><img src="../images/Jad.png" alt="Jad"></a>
+    <a href="https://www.linkedin.com/in/milinda-basavaraju/" target="_blank"><img src="../images/Milinda.png" alt="Milinda"></a>
+    <a href="https://www.linkedin.com/in/bahlmaulik1/" target="_blank"><img src="../images/Maulik.png" alt="Maulik"></a>
+  </div>
+</body>
+</html>

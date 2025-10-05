@@ -1,0 +1,14 @@
+{
+  "name": "lumina-suitability-analysis",
+  "version": "1.0.0",
+  "description": "Agricultural Suitability Analysis Platform",
+  "dependencies": {
+    "geotiff": "^2.0.7",
+    "ol": "^7.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "start": "python -m http.server 8000"
+  }
+}
