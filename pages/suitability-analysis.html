@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agricultural Suitability Analysis</title>
+  <link rel="stylesheet" href="text-style.css" />
+  <style>
+    body {
+      background: #0b1e39;
+      color: #ffffff;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-y: auto;
+    }
+
+    .content {
+      max-width: 1000px;
+      margin: 80px auto;
+      padding: 40px;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.6rem;
+      margin-bottom: 40px;
+      color: #ffffff;
+    }
+
+    h2 {
+      color: #a7c7ff;
+      font-size: 1.8rem;
+      margin-top: 50px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    /* Suitability Analysis Styles */
+    .factor-control {
+      background: #0f2845;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #2d5a87;
+    }
+
+    .suitability-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      background: #1a3a5c;
+      border-radius: 4px;
+      outline: none;
+      border: 1px solid #4a90e2;
+    }
+
+    .suitability-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #4fc3f7;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(79, 195, 247, 0.4);
+    }
+
+    .suitability-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #4fc3f7;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(79, 195, 247, 0.4);
+    }
+
+    #suitability-controls-panel button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    #suitability-controls-panel button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <h1>🌾 Agricultural Suitability Analysis</h1>
+
+    <p>This interactive tool allows you to analyze agricultural suitability for the Addis Ababa region by adjusting the importance weights of different environmental factors. Use the sliders below to customize how each factor influences the overall suitability assessment, then generate a new suitability map based on your preferences.</p>
+
+    <h2>Interactive Suitability Analysis</h2>
+    
+    <!-- Preset Management Section -->
+    <div id="preset-management" style="background: #0a1e35; padding: 20px; border-radius: 12px; border: 1px solid #2d5a87; margin-top: 20px;">
+      <h3 style="color: #a7c7ff; font-size: 1.2rem; margin: 0 0 15px 0;">Weight Presets</h3>
+      
+      <div style="display: grid; grid-template-columns: 1fr auto auto auto; gap: 10px; align-items: center; margin-bottom: 15px;">
+        <select id="preset-dropdown" style="padding: 8px 12px; background: #1a3a5c; color: #ffffff; border: 1px solid #4a90e2; border-radius: 6px; font-size: 14px;">
+          <option value="">Select a preset...</option>
+        </select>
+        <button id="load-preset" style="padding: 8px 15px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">Load</button>
+        <button id="save-preset" style="padding: 8px 15px; background: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">Save As...</button>
+        <button id="delete-preset" style="padding: 8px 15px; background: #dc3545; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">Delete</button>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 10px; color: #a7c7ff; font-size: 14px;">
+        <span>💡 Tip: Weights will be automatically normalized to 100% when you save a preset</span>
+      </div>
+    </div>
+    
+    <div id="suitability-controls-panel" style="background: #0f2845; padding: 25px; border-radius: 12px; border: 1px solid #2d5a87; margin-top: 20px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 25px;">
+        
+        <div class="factor-control">
+          <label for="fertility-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            🌱 Fertility: <span id="fertility-value">20</span>%
+          </label>
+          <input type="range" id="fertility-slider" class="suitability-slider" min="1" max="100" value="20">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Overall soil fertility</div>
+        </div>
+
+        <div class="factor-control">
+          <label for="moisture-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            💧 Soil Moisture: <span id="moisture-value">15</span>%
+          </label>
+          <input type="range" id="moisture-slider" class="suitability-slider" min="1" max="100" value="15">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Soil water content</div>
+        </div>
+
+        <div class="factor-control">
+          <label for="soc-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            🍃 Soil Organic Carbon: <span id="soc-value">12</span>%
+          </label>
+          <input type="range" id="soc-slider" class="suitability-slider" min="1" max="100" value="12">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Organic matter content</div>
+        </div>
+
+        <div class="factor-control">
+          <label for="ndvi-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            🌿 NDVI: <span id="ndvi-value">10</span>%
+          </label>
+          <input type="range" id="ndvi-slider" class="suitability-slider" min="1" max="100" value="10">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Vegetation index</div>
+        </div>
+
+        <div class="factor-control">
+          <label for="nitrogen-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            🔵 Nitrogen: <span id="nitrogen-value">10</span>%
+          </label>
+          <input type="range" id="nitrogen-slider" class="suitability-slider" min="1" max="100" value="10">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Nitrogen availability</div>
+        </div>
+
+        <div class="factor-control">
+          <label for="phosphorus-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            🟠 Phosphorus: <span id="phosphorus-value">10</span>%
+          </label>
+          <input type="range" id="phosphorus-slider" class="suitability-slider" min="1" max="100" value="10">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Phosphorus availability</div>
+        </div>
+
+        <div class="factor-control">
+          <label for="potassium-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            🟣 Potassium: <span id="potassium-value">8</span>%
+          </label>
+          <input type="range" id="potassium-slider" class="suitability-slider" min="1" max="100" value="8">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Potassium availability</div>
+        </div>
+
+        <div class="factor-control">
+          <label for="ph-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            ⚗️ pH: <span id="ph-value">8</span>%
+          </label>
+          <input type="range" id="ph-slider" class="suitability-slider" min="1" max="100" value="8">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Soil acidity/alkalinity</div>
+        </div>
+
+        <div class="factor-control">
+          <label for="texture-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            🪨 Soil Texture: <span id="texture-value">4</span>%
+          </label>
+          <input type="range" id="texture-slider" class="suitability-slider" min="1" max="100" value="4">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Soil composition</div>
+        </div>
+
+        <div class="factor-control">
+          <label for="sulphur-slider" style="display: block; font-weight: bold; margin-bottom: 8px; color: #ffffff;">
+            🟡 Sulphur: <span id="sulphur-value">3</span>%
+          </label>
+          <input type="range" id="sulphur-slider" class="suitability-slider" min="1" max="100" value="3">
+          <div style="font-size: 12px; color: #a7c7ff; margin-top: 5px;">Sulphur availability</div>
+        </div>
+
+      </div>
+
+      <div style="border-top: 1px solid #2d5a87; padding-top: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <div style="font-size: 16px; font-weight: bold; color: #ffffff;">
+              Total Weight: <span id="total-weight" style="color: #4fc3f7;">100</span>%
+            </div>
+            <div id="normalization-indicator" style="font-size: 12px; color: #ffc107; display: none;">
+              ⚖️ Normalizing to 100%...
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="reset-defaults" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600;">
+              ↺ Reset Defaults
+            </button>
+            <button id="generate-suitability" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600;">
+              🔄 Generate Suitability Map
+            </button>
+          </div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="font-size: 14px; color: #ffffff;">
+            Status: <span id="suitability-status" style="color: #4fc3f7;">Ready to generate map</span>
+          </div>
+          <div style="font-size: 12px; color: #a7c7ff;">
+            Navigate to the Map page to view results
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Suitability Analysis Script -->
+  <script src="../suitability-analysis.js"></script>
+
+</body>
+</html>

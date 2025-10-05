@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urban Planner — Addis Ababa Agricultural Suitability</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="container">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <img src="images/TeamLogo.png" alt="Team Logo" id="logo" />
+      <h2>Urban Planner</h2>
+      <button class="nav-btn" data-page="map">🌍 Map</button>
+      <button class="nav-btn" data-page="text">📄 Project Description</button>
+      <button class="nav-btn" data-page="suitability-analysis">🌾 Suitability Analysis</button>
+      <button class="nav-btn" data-page="team">👥 Team</button>
+      <button class="nav-btn" data-page="appendix">📚 Appendix</button>
+    </div>
+
+    <!-- Main content -->
+    <div id="content">
+      <iframe id="pageFrame" src="pages/map.html" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Handle navigation
+    const buttons = document.querySelectorAll(".nav-btn");
+    const frame = document.getElementById("pageFrame");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const page = btn.dataset.page;
+        frame.src = `pages/${page}.html`;
+        
+        // Update active state
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Handle messages from iframe (for navigation from within pages)
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.action === 'navigate') {
+        const page = event.data.page;
+        frame.src = `pages/${page}.html`;
+        
+        // Update active button state
+        buttons.forEach(b => {
+          b.classList.remove('active');
+          if (b.dataset.page === page) {
+            b.classList.add('active');
+          }
+        });
+      }
+    });
+
+    // Set initial active state for map button
+    document.querySelector('.nav-btn[data-page="map"]').classList.add('active');
+  </script>
+</body>
+</html>
